@@ -28,7 +28,11 @@ func main() {
 	fmt.Printf("Phone Number: ")
 	fmt.Scanf("%d",&phone)
 
+
+	//read contact
 	fmt.Println(name, phone)
+
+	
 
 
 }

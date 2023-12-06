@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact List</title>
+</head>
+
+<body>
+    <section>
+        <div>
+            <h1>Contact Info</h1> 
+<div>
+            <div>  
+                <form id="reqForm" action="/request" name="contact" method="POST" netlify-honeypot="bot-field" data-netlify="true">
+                   
+                    <div class="form-control">
+                        <input type="text" name="name" placeholder="Name" required>
+                    </div>
+                    <div class="form-control">
+                        <input type="tel" id="phone" name="phone" placeholder="Phone Number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required />
+                    </div>
+                    <div>
+                        <input type="submit" value="Add" class="btn btn-primary">
+                    </div>
+                    
+                    
+                </form>
+            </div>
+            <div>
+                <input type="submit" value="See All Contacts" class="btn btn-primary">
+            </div>
+        </div>
+
+        </div>
+    </section>
+</body>
+</html>
