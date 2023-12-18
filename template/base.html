@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="resources/css/style.css">
+    <title>Contact List</title>
+</head>
+
+<body>
+    {{block "header" .}}
+    <!-- Navbar-->
+    <div class="navbar">
+        
+            
+            <nav>
+                <ul>
+                    <!-- <li><a href="/">Home</a></li> -->
+                    <li><a href="/">Add New</a></li>
+                    <li><a href="/view">View All</a></li>
+                </ul>
+            </nav>
+        
+    </div>
+    {{end}}
+
+    {{block "form" .}}
+    <section>
+        <div class="contact">
+            <h1 class="into">Contact Info</h1> 
+<div>
+            <div>  
+                <form id="reqForm" action="/" name="contact" method="POST" netlify-honeypot="bot-field" data-netlify="true">
+                   
+                    <div class="form-control">
+                        <input type="text" name="name" placeholder="Name" required>
+                    </div>
+                    <div class="form-control">
+                        <input type="tel" id="phone" name="phone" placeholder="Phone Number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required />
+                    </div>
+                    <div>
+                        <input type="submit" value="Add" class="btn btn-primary">
+                    </div>
+                    <div>
+                        <input type="submit" value="See All" class="btn btn-primary">
+                    </div>
+                    <div>
+                        <input type="submit" value="Update" class="btn btn-primary">
+                    </div>
+                    <div>
+                        <input type="submit" value="Delete" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+            <!-- <div>
+                <input type="submit" value="See All Contacts" class="btn btn-primary">
+            </div> -->
+        </div>
+
+        </div>
+    </section>
+    {{end}}
+</body>
+
+</html>
