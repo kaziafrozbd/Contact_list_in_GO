@@ -4,11 +4,40 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+    "database/sql"
+    _ "github.com/go-sql-driver/mysql"
 )
+var db *sql.DB
+var err error
+func init(){
+
+    // Open up our database connection.
+    // I've set up a database on my local machine using phpmyadmin.
+    // The database is called testDb
+    db, err = sql.Open("mysql", "root:contact123@tcp(127.0.0.1:3306)/contact_list_db")
+
+    // if there is an error opening the connection, handle it
+    if err != nil {
+        panic(err.Error())
+    }
+
+    // defer the close till after the main function has finished
+    // executing
+    // defer db.Close()
+
+	
+    
+
+
+	fmt.Println("database connected")
+}
+
+
 
 func main() {
 
 	http.HandleFunc("/", add)
+	http.HandleFunc("/req", req)
 	http.HandleFunc("/view", view)
 
 	http.Handle("/resources/", http.StripPrefix("/resources/", http.FileServer(http.Dir("./assets"))))
@@ -39,7 +68,29 @@ func view(w http.ResponseWriter, r *http.Request){
 	// fmt.Fprintf(w, `welcome`)
 }
 
+func req(w http.ResponseWriter, r *http.Request){
 
+	name := r.FormValue("name")
+	phone := r.FormValue("phone")
+
+
+
+	qs := "INSERT INTO `contact` (`id`, `name`, `phone`, `status`) VALUES (NULL, '%s', '%s', '1');"
+	sql := fmt.Sprintf(qs,name,phone)
+	// perform a db.Query insert
+    insert, err := db.Query(sql)
+
+    // if there is an error inserting, handle it
+    if err != nil {
+        panic(err.Error())
+    }
+    // be careful deferring Queries if you are using transactions
+    defer insert.Close()
+	
+	fmt.Println(name,phone)
+
+	fmt.Fprintf(w, `recieved`)
+}
 
 
 
