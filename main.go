@@ -32,7 +32,10 @@ func init(){
 	fmt.Println("database connected")
 }
 
-
+type Contact struct{
+	Name string
+	Phone int
+}
 
 func main() {
 
@@ -65,7 +68,36 @@ func view(w http.ResponseWriter, r *http.Request){
 		fmt.Println(err.Error())
 	}
 	ptmp.Execute(w, nil)
+
+	//show data from db
+
+	con, err := db.Query("SELECT `name`, `phone` FROM `contact` WHERE 1")
+
+    if err!=nil {
+		fmt.Println(err.Error())
+	}
+
+    for con.Next() {
+
+        var conList Contact
+        err := con.Scan(&conList.Name, &conList.Phone)
+
+        if err!=nil {
+			fmt.Println(err.Error())
+		}
+
+        fmt.Printf("%v\n", conList)
+
+    }
+	defer con.Close()
 	// fmt.Fprintf(w, `welcome`)
+
+	// rows, err := db.Query("SELECT `name`, `phone` FROM `contact` WHERE 1")
+	// if err != nil {
+    //     panic(err.Error())
+    // }
+	// fmt.Println(rows)
+
 }
 
 func req(w http.ResponseWriter, r *http.Request){
